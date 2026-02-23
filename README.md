@@ -10,7 +10,7 @@ A simple RESTful API built with **Node.js** and **Express.js** that performs CRU
 
 🔗**Postman:** https://documenter.getpostman.com/view/50841270/2sBXcGCeXi
 
-🔗**Render:** https://node-ass-hjxr.onrender.com
+🔗**Render:** https://node-ass-hjxr.onrender.com/students
 
 
 ### 🛠 Tech Stack
