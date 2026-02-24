@@ -107,7 +107,7 @@ Each student object has the following fields:
 
 ## 👤 Author
 
-**Vedant**
+**Sahil Chaudhari**
 
 ## 📜 License
 
