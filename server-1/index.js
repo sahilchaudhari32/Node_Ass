@@ -79,9 +79,12 @@ const students = [
   }
 ];
 
+
+
 app.get("/students", (req, res) => {
   return res.status(200).json(students);
 });
+
 
 
 app.get("/students/topper", (req, res) => {
@@ -89,12 +92,19 @@ app.get("/students/topper", (req, res) => {
     return res.status(404).json({ message: "No students found" });
   }
 
-  const topper = students.reduce((prev, current) =>
-    current.cgpa > prev.cgpa ? current : prev
-  );
+let topper = students[0];
+for (let i = 1; i < students.length; i++) {
+  if (students[i].cgpa > topper.cgpa) {
+    topper = students[i];
+  }
+}
+
+// let topper = students.sort((a, b) => b.cgpa - a.cgpa)[0];
 
   return res.status(200).json(topper);
 });
+
+
 
 
 app.get("/students/average", (req, res) => {
@@ -102,20 +112,24 @@ app.get("/students/average", (req, res) => {
     return res.status(404).json({ message: "No students found" });
   }
 
-  const total = students.reduce((sum, student) => sum + student.cgpa, 0);
+let total = 0;
+for (let i = 0; i < students.length; i++) {
+  total += students[i].cgpa;
+}
+
   const average = (total / students.length).toFixed(2);
 
-  return res.status(200).json({
-    averageCGPA: Number(average)
-  });
+  return res.status(200).json({averageCGPA: Number(average)});
 });
+
+
 
 
 app.get("/students/count", (req, res) => {
-  return res.status(200).json({
-    totalStudents: students.length
-  });
+  return res.status(200).json({ totalStudents: students.length });
 });
+
+
 
 
 app.get("/students/:id", (req, res) => {
@@ -131,15 +145,19 @@ app.get("/students/:id", (req, res) => {
 });
 
 
+
+
 app.get("/students/branch/:branchName", (req, res) => {
-  const branchName = req.params.branchName.toLowerCase();
+  const branchName = req.params.branchName.toUpperCase();
 
   const filteredStudents = students.filter(
-    (student) => student.branch.toLowerCase() === branchName
+    (student) => student.branch === branchName
   );
 
   return res.status(200).json(filteredStudents);
 });
+
+
 
 
 app.listen(3000, () => {
